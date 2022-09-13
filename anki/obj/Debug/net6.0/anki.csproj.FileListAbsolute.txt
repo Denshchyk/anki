@@ -1,0 +1,15 @@
+/Users/pavlodenshchyk/RiderProjects/anki/anki/bin/Debug/net6.0/anki
+/Users/pavlodenshchyk/RiderProjects/anki/anki/bin/Debug/net6.0/anki.deps.json
+/Users/pavlodenshchyk/RiderProjects/anki/anki/bin/Debug/net6.0/anki.runtimeconfig.json
+/Users/pavlodenshchyk/RiderProjects/anki/anki/bin/Debug/net6.0/anki.dll
+/Users/pavlodenshchyk/RiderProjects/anki/anki/bin/Debug/net6.0/anki.pdb
+/Users/pavlodenshchyk/RiderProjects/anki/anki/obj/Debug/net6.0/anki.csproj.AssemblyReference.cache
+/Users/pavlodenshchyk/RiderProjects/anki/anki/obj/Debug/net6.0/anki.GeneratedMSBuildEditorConfig.editorconfig
+/Users/pavlodenshchyk/RiderProjects/anki/anki/obj/Debug/net6.0/anki.AssemblyInfoInputs.cache
+/Users/pavlodenshchyk/RiderProjects/anki/anki/obj/Debug/net6.0/anki.AssemblyInfo.cs
+/Users/pavlodenshchyk/RiderProjects/anki/anki/obj/Debug/net6.0/anki.csproj.CoreCompileInputs.cache
+/Users/pavlodenshchyk/RiderProjects/anki/anki/obj/Debug/net6.0/anki.dll
+/Users/pavlodenshchyk/RiderProjects/anki/anki/obj/Debug/net6.0/refint/anki.dll
+/Users/pavlodenshchyk/RiderProjects/anki/anki/obj/Debug/net6.0/anki.pdb
+/Users/pavlodenshchyk/RiderProjects/anki/anki/obj/Debug/net6.0/anki.genruntimeconfig.cache
+/Users/pavlodenshchyk/RiderProjects/anki/anki/obj/Debug/net6.0/ref/anki.dll

@@ -1,0 +1,60 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/pavlodenshchyk/RiderProjects/anki/anki/anki.csproj": {}
+  },
+  "projects": {
+    "/Users/pavlodenshchyk/RiderProjects/anki/anki/anki.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/pavlodenshchyk/RiderProjects/anki/anki/anki.csproj",
+        "projectName": "anki",
+        "projectPath": "/Users/pavlodenshchyk/RiderProjects/anki/anki/anki.csproj",
+        "packagesPath": "/Users/pavlodenshchyk/.nuget/packages/",
+        "outputPath": "/Users/pavlodenshchyk/RiderProjects/anki/anki/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/pavlodenshchyk/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/Users/pavlodenshchyk/.dotnet/sdk/6.0.300/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
