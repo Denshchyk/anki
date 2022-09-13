@@ -6,30 +6,44 @@ using ankiapp;
 
 Console.WriteLine("Добро пожаловать в Anki");
 
-Console.WriteLine("1-Fail (1 min) 2-ok (2 min), 3-good (4 min)");
-
 
 DateTime d1 = DateTime.Now;
 var cardService = new CardService();
 var randomCard = cardService.GetRandomCard();
 Console.WriteLine(randomCard.Front);
 
-var key = Console.ReadKey();
+Console.WriteLine("1-Fail (1 min) 2-ok (2 min), 3-good (4 min), 4-Create new card");
 
-if (key.KeyChar == '1')
-{
-    d1.AddMinutes(1);
-}
-if (key.KeyChar == '2')
-{
-   d1.AddMinutes(2);
-}
+Console.WriteLine("Press ESC to stop");
+do {
+    while (! Console.KeyAvailable) 
+    {
+        var key = Console.ReadKey();
 
-if (key.KeyChar == '3')
-{
-    d1.AddMinutes(4);
-}
-else Console.WriteLine("вы нажали не правильную кнопку, выберите из списка");
+        if (key.KeyChar == '1')
+        {
+            d1.AddMinutes(1); 
+        }
+
+        if (key.KeyChar == '2')
+        {
+            d1.AddMinutes(2);
+        }
+
+        if (key.KeyChar == '3')
+        {
+            d1.AddMinutes(4);
+        }
+        if (key.KeyChar == '4')
+        {
+            Console.WriteLine("введите свою карточку:");
+            new Card { Front = Console.ReadLine(), Back = Console.ReadLine() };
+        }
+
+        Console.WriteLine(randomCard.Back);
+    }       
+} while (Console.ReadKey(true).Key != ConsoleKey.Escape);
+
 
 
 //если слово зафейлил, то повторять слово через 1 минуту, если хорошо, то черещ 2, если отлично, то через 4 минуты
