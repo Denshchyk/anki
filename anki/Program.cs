@@ -1,53 +1,57 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using System.Diagnostics;
+using System.Net.Sockets;
 using Anki;
 using ankiapp;
 
 Console.WriteLine("Добро пожаловать в Anki");
 
 
-DateTime d1 = DateTime.Now;
 var cardService = new CardService();
-var randomCard = cardService.GetRandomCard();
-Console.WriteLine(randomCard.Front);
-
-Console.WriteLine("1-Fail (1 min) 2-ok (2 min), 3-good (4 min), 4-Create new card");
-
+Card randomCard = new Card();
+Console.WriteLine("1-New random card, 2-Fail (1 min) 3-ok (2 min), 4-good (4 min), 5-Create new card");
 Console.WriteLine("Press ESC to stop");
 do {
     while (! Console.KeyAvailable) 
     {
+
         var key = Console.ReadKey();
 
         if (key.KeyChar == '1')
         {
-            d1.AddMinutes(1); 
+            randomCard = cardService.GetRandomOverdueCard();
+            Console.WriteLine(randomCard.Front);
         }
-
+         
         if (key.KeyChar == '2')
         {
-            d1.AddMinutes(2);
+           randomCard.Time = randomCard.Time.AddMinutes(1);
         }
 
         if (key.KeyChar == '3')
         {
-            d1.AddMinutes(4);
+            randomCard.Time = randomCard.Time.AddMinutes(2);
         }
         if (key.KeyChar == '4')
         {
-            Console.WriteLine("введите свою карточку:");
-            new Card { Front = Console.ReadLine(), Back = Console.ReadLine() };
+            randomCard.Time =randomCard.Time.AddMinutes(4);
         }
 
-        Console.WriteLine(randomCard.Back);
+        if (key.KeyChar == '5')
+        {
+            Console.WriteLine("введите свою карточку:");
+            var front = Console.ReadLine();
+            var back = Console.ReadLine();
+            cardService.AddCard(front,back);
+        }
+
     }       
 } while (Console.ReadKey(true).Key != ConsoleKey.Escape);
 
 
 
-//если слово зафейлил, то повторять слово через 1 минуту, если хорошо, то черещ 2, если отлично, то через 4 минуты
-//занести слова, потом переделать под базу данных с вводом
+//удаление карточки
 
 namespace ankiapp
 {
@@ -55,18 +59,44 @@ namespace ankiapp
     {
         public List<Card> Cards = new List<Card>
         {
-            new Card { Front = "mom", Back = "мама" },
-            new Card { Front = "father", Back = "папа" },
-            new Card { Front = "sad", Back = "грустный" },
-            new Card { Front = "good", Back = "хорошо" },
-            new Card { Front = "great", Back = "отлично" }
+            new Card { Front = "mom", Back = "мама", Time = DateTime.Now},
+            new Card { Front = "father", Back = "папа", Time = DateTime.Now },
+            new Card { Front = "sad", Back = "грустный", Time = DateTime.Now },
+            new Card { Front = "good", Back = "хорошо", Time = DateTime.Now },
+            new Card { Front = "great", Back = "отлично", Time = DateTime.Now }
         };
 
-        public Card GetRandomCard()
+        public Card GetRandomOverdueCard()
         {
-            var randomNumber = new Random().Next(0, Cards.Count);
+            var overdueCards = GetOverdueCards();
+            var randomNumber = new Random().Next(0, overdueCards.Count);
             
-            return Cards [randomNumber];
+            return overdueCards[randomNumber];
+        }
+
+        public List<Card> GetOverdueCards()
+        {
+            var ovedueCards = new List<Card>();
+
+            foreach (var card in Cards)
+            {
+                if (card.Time <= DateTime.Now)
+                {
+                    ovedueCards.Add(card);
+                }
+            }
+            return ovedueCards;
+        }
+
+        public void AddCard(string front, string back)
+        {
+            var card = new Card();
+
+            card.Front = front;
+            card.Back = back;
+            card.Time = DateTime.Now;
+
+            this.Cards.Add(card);
         }
     }
 }
