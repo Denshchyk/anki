@@ -47,7 +47,7 @@ do {
 
         if (key.KeyChar == '5')
         {
-            Console.WriteLine("введите свою карточку: 1 - front, 2 - Back, 3 - ID");
+            Console.WriteLine("введите свою карточку: 1 - front, 2 - Back");
             var front = Console.ReadLine();
             var back = Console.ReadLine();
             cardService.AddCard(front,back);
@@ -61,12 +61,16 @@ do {
             Console.WriteLine(deleteCard.Front + " delete");
         }
 
+        if (key.KeyChar == '7')
+        {
+            Console.WriteLine("\n" + randomCard.Id);
+            var cardUpdate = cardService.UpdateCard(Console.ReadLine(), Console.ReadLine(), Console.ReadLine());
+            Console.WriteLine(cardUpdate.Front + cardUpdate.Back +"Card updated");
+        }
+
     }       
 } while (Console.ReadKey(true).Key != ConsoleKey.Escape);
 
-
-
-//удаление карточки
 
 namespace ankiapp
 {
@@ -113,5 +117,12 @@ namespace ankiapp
             return cardDelete;
         }
 
+        public Card UpdateCard (string id, string front, string back)
+        {
+            var cardUpdate = Cards.SingleOrDefault(card => card.Id.ToString() == id);
+            cardUpdate.Front = front;
+            cardUpdate.Back = back;
+            return cardUpdate;
+        }
     }
 }
