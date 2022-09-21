@@ -7,4 +7,6 @@ public class Card
     public string Back { get; set; }
 
     public DateTime Time { get; set; }
+    
+    public Guid Id { get; set; }
 }
