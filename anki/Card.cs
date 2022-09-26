@@ -9,4 +9,5 @@ public class Card
     public DateTime Time { get; set; }
     
     public Guid Id { get; set; }
+    
 }
