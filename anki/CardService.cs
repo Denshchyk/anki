@@ -57,8 +57,6 @@ namespace ankiapp
         public Card DeleteCard(string front, string back)
         {
             var cardDelete = Cards.SingleOrDefault(card => card.Front.ToString() == front && card.Back.ToString() == back);
-            cardDelete.Front = front;
-            cardDelete.Back = back;
             Cards.Remove(cardDelete);
             return cardDelete;
         }
