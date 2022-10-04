@@ -3,6 +3,7 @@
 using System.Diagnostics;
 using System.Net.Sockets;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using Anki;
 using ankiapp;
 using Microsoft.VisualBasic.FileIO;
@@ -11,7 +12,7 @@ Console.WriteLine("Добро пожаловать в Anki");
 
 
 var cardService = new CardService();
-Card randomCard = new Card();
+Card randomCard = new Card("Front", "Back");
 
 Console.WriteLine("1-New random card, 2-Fail (1 min) 3-ok (2 min), 4-good (4 min), 5-Create new card, 6-Delete this card, 7-Update card, 8 -Delete card with front and back");
 Console.WriteLine("Press ESC to stop");

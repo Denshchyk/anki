@@ -1,3 +1,4 @@
+using System.Net;
 using System.Runtime.ExceptionServices;
 using Anki;
 
@@ -5,13 +6,13 @@ namespace ankiapp
 {
     public class CardService
     {
-        public List<Card> Cards = new List<Card>
+        private List<Card> Cards = new List<Card>
         {
-            new Card { Front = "mom", Back = "мама", Time = DateTime.Now, Id = Guid.NewGuid()},
-            new Card { Front = "father", Back = "папа", Time = DateTime.Now, Id = Guid.NewGuid()},
-            new Card { Front = "sad", Back = "грустный", Time = DateTime.Now, Id = Guid.NewGuid()},
-            new Card { Front = "good", Back = "хорошо", Time = DateTime.Now, Id = Guid.NewGuid()},
-            new Card { Front = "great", Back = "отлично", Time = DateTime.Now, Id = Guid.NewGuid()}
+            new Card ("mom", "мама"),
+            new Card ("father", "папа"),
+            new Card ("sad", "грустный"),
+            new Card ("good", "хорошо"),
+            new Card ("great", "отлично")
         };
 
         public Card GetRandomOverdueCard()
@@ -29,10 +30,8 @@ namespace ankiapp
 
         public void AddCard(string front, string back)
         {
-            var card = new Card();
-
-            card.Front = front;
-            card.Back = back;
+            var card = new Card(front,back);
+            
             card.Id = Guid.NewGuid();
             card.Time = DateTime.Now;
 
