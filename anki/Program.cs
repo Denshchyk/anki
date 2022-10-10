@@ -67,15 +67,22 @@ do {
             }
             catch (Exception notFoundException)
             {
-                throw new NotFoundException("Card is not found");
+                Console.WriteLine(notFoundException.Message);
             }
         }
 
         if (key.KeyChar == '7')
         {
-            Console.WriteLine("\n" + randomCard.Id);
-            var cardUpdate = cardService.UpdateCard(Console.ReadLine(), Console.ReadLine(), Console.ReadLine());
-            Console.WriteLine(cardUpdate.Front + cardUpdate.Back +"Card updated");
+            try
+            {
+                Console.WriteLine("\n" + randomCard.Id);
+                var cardUpdate = cardService.UpdateCard(Console.ReadLine(), Console.ReadLine(), Console.ReadLine());
+                Console.WriteLine(cardUpdate.Front + cardUpdate.Back +"Card updated");
+            }
+            catch (Exception notFoundException)
+            {
+                Console.WriteLine(notFoundException.Message);
+            }
         }
         if (key.KeyChar == '8')
         {

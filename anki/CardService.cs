@@ -1,6 +1,7 @@
 using System.Data.Common;
 using System.Net;
 using System.Runtime.ExceptionServices;
+using anki;
 using Anki;
 
 namespace ankiapp
@@ -42,13 +43,23 @@ namespace ankiapp
         public Card DeleteCardId(string id)
         {
             var cardDeleteId = Cards.SingleOrDefault(card => card.Id.ToString() == id);
+            ThrowExceptionIfCardNull(cardDeleteId);
             Cards.Remove(cardDeleteId);
             return cardDeleteId;
+        }
+
+        private static void ThrowExceptionIfCardNull(Card? cardDeleteId)
+        {
+            if (cardDeleteId == null)
+            {
+                throw new NotFoundException("Card is not found");
+            }
         }
 
         public Card UpdateCard (string id, string front, string back)
         {
             var cardUpdate = Cards.SingleOrDefault(card => card.Id.ToString() == id);
+            ThrowExceptionIfCardNull(cardUpdate);
             cardUpdate.Front = front;
             cardUpdate.Back = back;
             return cardUpdate;
