@@ -7,4 +7,12 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <None Remove="Exceptions" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="ExceptionHangling.cs" />
+    </ItemGroup>
+
 </Project>

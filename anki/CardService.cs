@@ -1,3 +1,4 @@
+using System.Data.Common;
 using System.Net;
 using System.Runtime.ExceptionServices;
 using Anki;
@@ -6,7 +7,7 @@ namespace ankiapp
 {
     public class CardService
     {
-        private List<Card> Cards = new List<Card>
+        public List<Card> Cards = new List<Card>
         {
             new Card ("mom", "мама"),
             new Card ("father", "папа"),
