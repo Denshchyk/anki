@@ -1,6 +1,8 @@
 using System.Data.Common;
 using System.Net;
 using System.Runtime.ExceptionServices;
+using System.Security.Cryptography.X509Certificates;
+using System.Text.Json;
 using anki;
 using Anki;
 
@@ -70,6 +72,27 @@ namespace ankiapp
             var cardDelete = Cards.SingleOrDefault(card => card.Front.ToString() == front && card.Back.ToString() == back);
             Cards.Remove(cardDelete);
             return cardDelete;
+        }
+
+        public Card SaveCardToJson(string front, string back)
+        {
+            using (FileStream fs = new FileStream("Cards.json", FileMode.OpenOrCreate))
+            {
+                var newCard = new Card(front, back); 
+                JsonSerializer.Serialize<Card>(fs, newCard);
+                Console.WriteLine("Card has been saved to file");
+                return newCard;
+            }
+        }
+
+        public Card ReadCardFromJson(string front, string back)
+        {
+            using (FileStream fs = new FileStream("Cards.json", FileMode.OpenOrCreate))
+            {
+                Card? card = JsonSerializer.Deserialize<Card>(fs);
+                Console.WriteLine($"Front: {card?.Front}  Back: {card?.Back}");
+                return card;
+            }
         }
     }
 }

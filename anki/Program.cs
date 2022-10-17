@@ -4,13 +4,13 @@ using System.Diagnostics;
 using System.Net.Sockets;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Text.Json;
 using anki;
 using Anki;
 using ankiapp;
 using Microsoft.VisualBasic.FileIO;
 
 Console.WriteLine("Добро пожаловать в Anki");
-
 
 var cardService = new CardService();
 Card randomCard = new Card("Front", "Back");
@@ -54,6 +54,8 @@ do {
             var front = Console.ReadLine();
             var back = Console.ReadLine();
             cardService.AddCard(front,back);
+            
+            cardService.SaveCardToJson(front, back);
         }
 
         if (key.KeyChar == '6')

@@ -15,4 +15,8 @@
       <Compile Remove="ExceptionHangling.cs" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Content Include="bin\Debug\net6.0\user.json" />
+    </ItemGroup>
+
 </Project>
