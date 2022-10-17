@@ -1,14 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using System.Diagnostics;
-using System.Net.Sockets;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using System.Text.Json;
-using anki;
 using Anki;
 using ankiapp;
-using Microsoft.VisualBasic.FileIO;
 
 Console.WriteLine("Добро пожаловать в Anki");
 
