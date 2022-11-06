@@ -6,14 +6,12 @@ namespace ankiapp;
 
 public class CardService
 {
-    public List<Card> Cards = new()
+    private CardRepository _cardRepository;
+
+    public CardService(CardRepository cardRepository)
     {
-        new Card ("mom", "мама"),
-        new Card ("father", "папа"),
-        new Card ("sad", "грустный"),
-        new Card ("good", "хорошо"),
-        new Card ("great", "отлично")
-    };
+        _cardRepository = cardRepository;
+    }
 
     public Card GetRandomOverdueCard()
     {
@@ -22,10 +20,10 @@ public class CardService
             
         return overdueCards[randomNumber];
     }
-
+    
     public List<Card> GetOverdueCards()
     {
-        return Cards.Where(card => card.Time <= DateTime.Now).ToList();
+        return _cardRepository.GetAll().Where(card => card.Time <= DateTime.Now).ToList();
     }
 
     public void AddCard(string front, string back)
@@ -33,16 +31,16 @@ public class CardService
         var card = new Card(front,back);
             
         card.Id = Guid.NewGuid();
-        card.Time = DateTime.Now;
+        card.Time = DateTime.UtcNow;
         
-        Cards.Add(card);
+       _cardRepository.AddCard(card);
     }
 
     public Card DeleteCardId(string id)
     {
-        var cardDeleteId = Cards.SingleOrDefault(card => card.Id.ToString() == id);
+        var cardDeleteId = _cardRepository.GetById(id);
         ThrowExceptionIfCardNull(cardDeleteId);
-        Cards.Remove(cardDeleteId);
+        _cardRepository.RemoveCard(cardDeleteId);
         return cardDeleteId;
     }
 
@@ -54,19 +52,17 @@ public class CardService
         }
     }
 
-    public Card UpdateCard (string id, string front, string back)
+    public Card UpdateCard (Guid id)
     {
-        var cardUpdate = Cards.SingleOrDefault(card => card.Id.ToString() == id);
+        var cardUpdate = _cardRepository.GetById(id);
         ThrowExceptionIfCardNull(cardUpdate);
-        cardUpdate.Front = front;
-        cardUpdate.Back = back;
+        _cardRepository.UpdateCard(cardUpdate);
         return cardUpdate;
     }
 
-    public Card DeleteCard(string front, string back)
+    public Card DeleteCard(Card card)
     {
-        var cardDelete = Cards.SingleOrDefault(card => card.Front.ToString() == front && card.Back.ToString() == back);
-        Cards.Remove(cardDelete);
+        var cardDelete = _cardRepository.RemoveCard(card);
         return cardDelete;
     }
 

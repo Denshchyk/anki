@@ -9,6 +9,7 @@ public class Card
         Time = DateTime.Now;
         Id = Guid.NewGuid();
     }
+
     public string Front { get; set; }
     
     public string Back { get; set; }

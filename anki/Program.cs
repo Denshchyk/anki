@@ -1,11 +1,14 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using System.Data.Common;
+using System.Runtime.InteropServices;
+using anki;
 using Anki;
 using ankiapp;
 
 Console.WriteLine("Добро пожаловать в Anki");
 
-var cardService = new CardService();
+var cardService = new CardService(new CardRepository());
 Card randomCard = new Card("Front", "Back");
 
 
@@ -47,7 +50,6 @@ do {
             var front = Console.ReadLine();
             var back = Console.ReadLine();
             cardService.AddCard(front,back);
-            
             cardService.SaveCardToJson(front, back);
         }
 
@@ -58,7 +60,7 @@ do {
             {
                 var readLine = Console.ReadLine();
                 var deleteCard = cardService.DeleteCardId(readLine);
-                Console.WriteLine(deleteCard.Front + " delete");
+                Console.WriteLine(deleteCard + " delete");
             }
             catch (Exception notFoundException)
             {
@@ -71,8 +73,8 @@ do {
             try
             {
                 Console.WriteLine("\n" + randomCard.Id);
-                var cardUpdate = cardService.UpdateCard(Console.ReadLine(), Console.ReadLine(), Console.ReadLine());
-                Console.WriteLine(cardUpdate.Front + cardUpdate.Back +"Card updated");
+                var cardUpdate = cardService.UpdateCard;
+                Console.WriteLine(cardUpdate +"Card updated");
             }
             catch (Exception notFoundException)
             {
@@ -84,8 +86,8 @@ do {
             Console.WriteLine("введите карточку для удаления: 1 - front, 2 - Back");
             var front = Console.ReadLine();
             var back = Console.ReadLine();
-            var deleteCard = cardService.DeleteCard(front, back);
-            Console.WriteLine(deleteCard.Front + " " + deleteCard.Back + " delete");
+            var deleteCard = cardService.DeleteCard;
+            Console.WriteLine(deleteCard + " " + " delete");
         }
     }       
 } while (Console.ReadKey(true).Key != ConsoleKey.Escape);
