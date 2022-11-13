@@ -9,45 +9,42 @@ namespace anki;
 
 public class CardRepository
 {
-    public Card AddCard(Card addCard)
+    public async Task AddCardAsync(Card addCard)
     {
-        using ApplicationContext db = new ApplicationContext();
-        db.Cards.Add(addCard);
-        db.SaveChanges();
-        return addCard;
+        await using ApplicationContext db = new ApplicationContext();
+        await db.Cards.AddAsync(addCard);
+        await db.SaveChangesAsync();
     }
 
-    public Card UpdateCard(Card card)
+    public async Task UpdateCardAsync(Card card)
     {
-        using ApplicationContext db = new ApplicationContext();
-        if (card != null)
+        await using ApplicationContext db = new ApplicationContext();
+        if (true)
         {
             db.Cards.Update(card);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
         }
-        return card;
     }
 
-    public Card RemoveCard(Card card)
+    public async Task<Card> RemoveCardAsync(Card card)
     {
-        using ApplicationContext db = new ApplicationContext();
+        await using ApplicationContext db = new ApplicationContext();
         db.Cards.Remove(card);
-        db.SaveChanges();
+        await db.SaveChangesAsync();
         return card;
     }
 
-    public Card? GetById(Guid id)
+    public async Task<Card?> GetByIdAsync(Guid id)
     {
-        using ApplicationContext db = new ApplicationContext();
-        var card = db.Cards.AsNoTracking().FirstOrDefault(card => card.Id == id);
+        await using ApplicationContext db = new ApplicationContext();
+        var card = await db.Cards.AsNoTracking().FirstOrDefaultAsync(card => card.Id == id);
         return card;
-        
     }
-    public Card? GetById(string id)
+    public async Task<Card?> GetByIdAsync(string id)
     {
         var guid = Guid.Parse(id);
-        using ApplicationContext db = new ApplicationContext();
-        var card = db.Cards.AsNoTracking().FirstOrDefault(card => card.Id == guid);
+        await using ApplicationContext db = new ApplicationContext();
+        var card = await db.Cards.AsNoTracking().FirstOrDefaultAsync(card => card.Id == guid);
         return card;
     }
     public List<Card> GetAll()

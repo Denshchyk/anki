@@ -26,21 +26,21 @@ public class CardService
         return _cardRepository.GetAll().Where(card => card.Time <= DateTime.Now).ToList();
     }
 
-    public void AddCard(string front, string back)
+    public async Task AddCard(string front, string back)
     {
         var card = new Card(front,back);
             
         card.Id = Guid.NewGuid();
         card.Time = DateTime.UtcNow;
         
-       _cardRepository.AddCard(card);
+       await _cardRepository.AddCardAsync(card);
     }
 
-    public Card DeleteCardId(string id)
+    public async Task<Card> DeleteCardIdAsync(string id)
     {
-        var cardDeleteId = _cardRepository.GetById(id);
+        var cardDeleteId = await _cardRepository.GetByIdAsync(id);
         ThrowExceptionIfCardNull(cardDeleteId);
-        _cardRepository.RemoveCard(cardDeleteId);
+        await _cardRepository.RemoveCardAsync(cardDeleteId);
         return cardDeleteId;
     }
 
@@ -52,17 +52,17 @@ public class CardService
         }
     }
 
-    public Card UpdateCard (Guid id)
+    public async Task<Card> UpdateCardAsync (Guid id)
     {
-        var cardUpdate = _cardRepository.GetById(id);
+        var cardUpdate = await _cardRepository.GetByIdAsync(id);
         ThrowExceptionIfCardNull(cardUpdate);
-        _cardRepository.UpdateCard(cardUpdate);
+        await _cardRepository.UpdateCardAsync(cardUpdate);
         return cardUpdate;
     }
 
-    public Card DeleteCard(Card card)
+    public Task<Card> DeleteCard(Card card)
     {
-        var cardDelete = _cardRepository.RemoveCard(card);
+        var cardDelete = _cardRepository.RemoveCardAsync(card);
         return cardDelete;
     }
 

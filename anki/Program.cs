@@ -59,7 +59,7 @@ do {
             try
             {
                 var readLine = Console.ReadLine();
-                var deleteCard = cardService.DeleteCardId(readLine);
+                var deleteCard = cardService.DeleteCardIdAsync(readLine);
                 Console.WriteLine(deleteCard + " delete");
             }
             catch (Exception notFoundException)
@@ -73,7 +73,7 @@ do {
             try
             {
                 Console.WriteLine("\n" + randomCard.Id);
-                var cardUpdate = cardService.UpdateCard;
+                var cardUpdate = cardService.UpdateCardAsync;
                 Console.WriteLine(cardUpdate +"Card updated");
             }
             catch (Exception notFoundException)
