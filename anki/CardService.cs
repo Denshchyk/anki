@@ -23,7 +23,7 @@ public class CardService
     
     public List<Card> GetOverdueCards()
     {
-        return _cardRepository.GetAll().Where(card => card.Time <= DateTime.Now).ToList();
+        return _cardRepository.GetAll().Where(card => card.Time <= DateTime.UtcNow).ToList();
     }
 
     public async Task AddCard(string front, string back)

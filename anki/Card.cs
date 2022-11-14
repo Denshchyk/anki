@@ -6,7 +6,7 @@ public class Card
     {
         Front = front;
         Back = back;
-        Time = DateTime.Now;
+        Time = DateTime.UtcNow;
         Id = Guid.NewGuid();
     }
 
