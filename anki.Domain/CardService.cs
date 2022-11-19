@@ -1,8 +1,7 @@
+using System.Runtime.InteropServices;
 using System.Text.Json;
-using anki;
-using Anki;
 
-namespace ankiapp;
+namespace anki.Domain;
 
 public class CardService
 {
@@ -52,12 +51,19 @@ public class CardService
         }
     }
 
-    public async Task<Card> UpdateCardAsync (Guid id)
+    public async Task AddMinutesToCard(Card card, int minutes)
     {
-        var cardUpdate = await _cardRepository.GetByIdAsync(id);
+        card.Time = DateTime.UtcNow;
+        card.Time = card.Time.AddMinutes(minutes);
+        await UpdateCardAsync(card);
+    }
+
+    public async Task<Card> UpdateCardAsync (Card card)
+    {
+        var cardUpdate = await _cardRepository.GetByIdAsync(card.Id);
         ThrowExceptionIfCardNull(cardUpdate);
-        await _cardRepository.UpdateCardAsync(cardUpdate);
-        return cardUpdate;
+        await _cardRepository.UpdateCardAsync(card);
+        return card;
     }
 
     public Task<Card> DeleteCard(Card card)

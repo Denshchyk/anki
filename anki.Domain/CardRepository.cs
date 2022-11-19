@@ -1,12 +1,6 @@
-using System.Collections.Immutable;
-using System.Data;
-using System.Data.Common;
-using System.Runtime.InteropServices;
-using Anki;
-using ankiapp;
 using Microsoft.EntityFrameworkCore;
 
-namespace anki;
+namespace anki.Domain;
 
 public class CardRepository
 {
@@ -20,11 +14,8 @@ public class CardRepository
     public async Task UpdateCardAsync(Card card)
     {
         await using ApplicationContext db = new ApplicationContext();
-        if (true)
-        {
-            db.Cards.Update(card);
-            await db.SaveChangesAsync();
-        }
+        db.Cards.Update(card);
+        await db.SaveChangesAsync();
     }
 
     public async Task<Card> RemoveCardAsync(Card card)

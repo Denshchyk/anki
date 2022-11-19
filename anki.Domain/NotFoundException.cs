@@ -1,4 +1,4 @@
-namespace anki;
+namespace anki.Domain;
 
 class NotFoundException : Exception
 {

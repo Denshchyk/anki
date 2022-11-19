@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "anki", "anki\anki.csproj", "{6FC8DCD1-D54C-4D8B-A005-9C065A61060C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "anki.Console", "anki.Console\anki.Console.csproj", "{6FC8DCD1-D54C-4D8B-A005-9C065A61060C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "anki.Domain", "anki.Domain\anki.Domain.csproj", "{53622A56-5CCF-41DF-8CEB-2750C9A1E97B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,5 +14,9 @@ Global
 		{6FC8DCD1-D54C-4D8B-A005-9C065A61060C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6FC8DCD1-D54C-4D8B-A005-9C065A61060C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6FC8DCD1-D54C-4D8B-A005-9C065A61060C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53622A56-5CCF-41DF-8CEB-2750C9A1E97B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53622A56-5CCF-41DF-8CEB-2750C9A1E97B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53622A56-5CCF-41DF-8CEB-2750C9A1E97B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53622A56-5CCF-41DF-8CEB-2750C9A1E97B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

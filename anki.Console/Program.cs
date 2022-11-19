@@ -3,8 +3,7 @@
 using System.Data.Common;
 using System.Runtime.InteropServices;
 using anki;
-using Anki;
-using ankiapp;
+using anki.Domain;
 
 Console.WriteLine("Добро пожаловать в Anki");
 
@@ -26,20 +25,20 @@ do {
          
         if (key.KeyChar == '2')
         {
-           randomCard.Time = randomCard.Time.AddMinutes(1);
+           await cardService.AddMinutesToCard(randomCard, 1);
            Console.WriteLine("you see this word after 1 minute");
            Console.WriteLine(randomCard.Back);
         }
 
         if (key.KeyChar == '3')
         {
-            randomCard.Time = randomCard.Time.AddMinutes(2);
+            await cardService.AddMinutesToCard(randomCard, 2);
             Console.WriteLine("you see this word after 2 minutes");
             Console.WriteLine(randomCard.Back);
         }
         if (key.KeyChar == '4')
         {
-            randomCard.Time = randomCard.Time.AddMinutes(4);
+            await cardService.AddMinutesToCard(randomCard, 4);
             Console.WriteLine("you see this word after 4 minutes");
             Console.WriteLine(randomCard.Back);
         }
@@ -73,7 +72,13 @@ do {
             try
             {
                 Console.WriteLine("\n" + randomCard.Id);
-                var cardUpdate = cardService.UpdateCardAsync;
+                Console.WriteLine("Введите фронт");
+                var front = Console.ReadLine();
+                Console.WriteLine("Введите бэк");
+                var back = Console.ReadLine();
+                randomCard.Front = front;
+                randomCard.Back = back;
+                var cardUpdate = cardService.UpdateCardAsync(randomCard);
                 Console.WriteLine(cardUpdate +"Card updated");
             }
             catch (Exception notFoundException)

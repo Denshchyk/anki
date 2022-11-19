@@ -1,4 +1,4 @@
-namespace Anki;
+namespace anki.Domain;
 
 public class Card
 {

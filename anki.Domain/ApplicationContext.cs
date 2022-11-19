@@ -1,7 +1,6 @@
-using Anki;
 using Microsoft.EntityFrameworkCore;
 
-namespace anki;
+namespace anki.Domain;
 
 public class ApplicationContext : DbContext
 {
