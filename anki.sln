@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "anki.Console", "anki.Consol
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "anki.Domain", "anki.Domain\anki.Domain.csproj", "{53622A56-5CCF-41DF-8CEB-2750C9A1E97B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "anki.Web", "anki.Web\anki.Web.csproj", "{8D768D47-C922-42C0-9821-02BDC38ED97F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{53622A56-5CCF-41DF-8CEB-2750C9A1E97B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53622A56-5CCF-41DF-8CEB-2750C9A1E97B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53622A56-5CCF-41DF-8CEB-2750C9A1E97B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D768D47-C922-42C0-9821-02BDC38ED97F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D768D47-C922-42C0-9821-02BDC38ED97F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D768D47-C922-42C0-9821-02BDC38ED97F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D768D47-C922-42C0-9821-02BDC38ED97F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
