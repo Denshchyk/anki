@@ -25,7 +25,7 @@ public class CardService
         return _cardRepository.GetAll().Where(card => card.Time <= DateTime.UtcNow).ToList();
     }
 
-    public async Task AddCard(string front, string back)
+    public async Task AddCardAsync(string front, string back)
     {
         var card = new Card(front,back);
             
@@ -66,7 +66,7 @@ public class CardService
         return card;
     }
 
-    public Task<Card> DeleteCard(Card card)
+    public Task<Card> DeleteCardAsync(Card card)
     {
         var cardDelete = _cardRepository.RemoveCardAsync(card);
         return cardDelete;
@@ -87,5 +87,10 @@ public class CardService
         Card? card = JsonSerializer.Deserialize<Card>(fs);
         Console.WriteLine($"Front: {card?.Front}  Back: {card?.Back}");
         return card;
+    }
+
+    public List<Card> GetAll()
+    {
+       return _cardRepository.GetAll();
     }
 }

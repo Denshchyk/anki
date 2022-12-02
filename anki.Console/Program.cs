@@ -48,7 +48,7 @@ do {
             Console.WriteLine("введите свою карточку: 1 - front, 2 - Back");
             var front = Console.ReadLine();
             var back = Console.ReadLine();
-            cardService.AddCard(front,back);
+            cardService.AddCardAsync(front,back);
             cardService.SaveCardToJson(front, back);
         }
 
@@ -91,7 +91,7 @@ do {
             Console.WriteLine("введите карточку для удаления: 1 - front, 2 - Back");
             var front = Console.ReadLine();
             var back = Console.ReadLine();
-            var deleteCard = cardService.DeleteCard;
+            var deleteCard = cardService.DeleteCardAsync;
             Console.WriteLine(deleteCard + " " + " delete");
         }
     }       
