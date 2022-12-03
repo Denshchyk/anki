@@ -66,9 +66,9 @@ public class CardService
         return card;
     }
 
-    public Task<Card> DeleteCard(Card card)
+    public async Task<Card> DeleteCardAsync(Card card)
     {
-        var cardDelete = _cardRepository.RemoveCardAsync(card);
+        var cardDelete = await _cardRepository.RemoveCardAsync(card);
         return cardDelete;
     }
 
