@@ -39,6 +39,12 @@ public class CardRepository
         var card = await db.Cards.AsNoTracking().FirstOrDefaultAsync(card => card.Id == guid);
         return card;
     }
+    public async Task<Card?> GetByFrontAndBackAsync(string front, string back)
+    {
+        await using ApplicationContext db = new ApplicationContext();
+        var card = await db.Cards.AsNoTracking().FirstOrDefaultAsync(card => card.Front == front && card.Back == back);
+        return card;
+    }
     public List<Card> GetAll()
     {
         using ApplicationContext db = new ApplicationContext();

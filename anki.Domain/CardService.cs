@@ -93,4 +93,14 @@ public class CardService
     {
        return _cardRepository.GetAll();
     }
+
+    public async Task<Card?> GetByIdAsync(string id)
+    {
+        return await _cardRepository.GetByIdAsync(id);
+    }
+
+    public async Task<Card?> GetByFrontAndBackAsync(string front, string back)
+    {
+        return await _cardRepository.GetByFrontAndBackAsync(front, back);
+    }
 }
