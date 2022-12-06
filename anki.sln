@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "anki.Domain", "anki.Domain\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "anki.Web", "anki.Web\anki.Web.csproj", "{8D768D47-C922-42C0-9821-02BDC38ED97F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "anki.Tests", "anki.Tests\anki.Tests.csproj", "{7B419E09-86BD-4B1A-9D41-767A85068AF2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{8D768D47-C922-42C0-9821-02BDC38ED97F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D768D47-C922-42C0-9821-02BDC38ED97F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D768D47-C922-42C0-9821-02BDC38ED97F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B419E09-86BD-4B1A-9D41-767A85068AF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B419E09-86BD-4B1A-9D41-767A85068AF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B419E09-86BD-4B1A-9D41-767A85068AF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B419E09-86BD-4B1A-9D41-767A85068AF2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
