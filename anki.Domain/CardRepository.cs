@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace anki.Domain;
 
-public class CardRepository
+public class CardRepository : ICardRepository
 {
     public async Task AddCardAsync(Card addCard)
     {

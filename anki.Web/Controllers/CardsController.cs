@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
 using anki.Domain;
@@ -10,11 +11,13 @@ namespace anki.Web.Controllers;
 [Route("[controller]")]
 public class CardsController : ControllerBase
 {
-    private CardService _cardService;
+    private ICardService _cardService;
+    
+    
 
-    public CardsController()
+    public CardsController(ICardService cardService)
     {
-        _cardService = new CardService(new CardRepository());
+        _cardService = cardService;
     }
     
     [HttpGet]
@@ -48,7 +51,7 @@ public class CardsController : ControllerBase
         return card;
     }
     [HttpDelete("{front},{back}")]
-    public async Task<ActionResult<Card>> DeleteCard(string front, string back, Card card)
+    public async Task<ActionResult<Card>> DeleteCard(string front, string back)
     {
         var getCard = await _cardService.GetByFrontAndBackAsync(front, back);
         if (getCard.Front != front && getCard.Back != back)
@@ -64,8 +67,20 @@ public class CardsController : ControllerBase
         return await _cardService.DeleteCardAsync(getCard);
     }
 
-    //`put method = update card
-    // get overduecards
-    // delete
-    // post = 
+    [HttpPut]
+    public async Task<ActionResult<Card>> UpdateCard(Card card)
+    {
+        if (card == null)
+        {
+            return NotFound();
+        }
+
+        return await _cardService.UpdateCardAsync(card);
+    }
+
+    [HttpPost]
+    public async Task AddCard(Card card)
+    {
+        await _cardService.AddCardAsync(card);
+    }
 }

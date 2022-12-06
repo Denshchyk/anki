@@ -1,9 +1,13 @@
+using anki.Domain;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<ICardService, CardService>();
+builder.Services.AddScoped<ICardRepository, CardRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

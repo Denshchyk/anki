@@ -3,11 +3,11 @@ using System.Text.Json;
 
 namespace anki.Domain;
 
-public class CardService
+public class CardService : ICardService
 {
-    private CardRepository _cardRepository;
+    private ICardRepository _cardRepository;
 
-    public CardService(CardRepository cardRepository)
+    public CardService(ICardRepository cardRepository)
     {
         _cardRepository = cardRepository;
     }
@@ -28,7 +28,7 @@ public class CardService
     public async Task AddCardAsync(string front, string back)
     {
         var card = new Card(front,back);
-            
+        
         card.Id = Guid.NewGuid();
         card.Time = DateTime.UtcNow;
         
@@ -102,5 +102,12 @@ public class CardService
     public async Task<Card?> GetByFrontAndBackAsync(string front, string back)
     {
         return await _cardRepository.GetByFrontAndBackAsync(front, back);
+    }
+    public async Task AddCardAsync(Card card)
+    {
+        card.Id = Guid.NewGuid();
+        card.Time = DateTime.UtcNow;
+        
+        await _cardRepository.AddCardAsync(card);
     }
 }
