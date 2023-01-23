@@ -4,9 +4,8 @@ namespace anki.Domain;
 
 public class ApplicationContext : DbContext
 {
-    public DbSet<Card> Cards { get; set; }
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
     {
-        optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=anki;Username=myusername;Password=mypassword");
     }
+    public DbSet<Card> Cards { get; set; }
 }

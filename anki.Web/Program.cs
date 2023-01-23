@@ -1,4 +1,5 @@
 using anki.Domain;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ICardService, CardService>();
 builder.Services.AddScoped<ICardRepository, CardRepository>();
+builder.Services.AddDbContextPool<ApplicationContext>(opt =>
+    opt.UseNpgsql(builder.Configuration.GetConnectionString("Applications")));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
