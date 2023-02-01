@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using anki.Domain;
@@ -11,9 +12,10 @@ using anki.Domain;
 namespace anki.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20230130104312_AddTag")]
+    partial class AddTag
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,21 +46,6 @@ namespace anki.Migrations
                     b.ToTable("Cards");
                 });
 
-            modelBuilder.Entity("anki.Domain.CardTag", b =>
-                {
-                    b.Property<Guid>("CardId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("TagId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("CardId", "TagId");
-
-                    b.HasIndex("TagId");
-
-                    b.ToTable("CardTags");
-                });
-
             modelBuilder.Entity("anki.Domain.Tag", b =>
                 {
                     b.Property<Guid>("TagId")
@@ -74,33 +61,34 @@ namespace anki.Migrations
                     b.ToTable("Tags");
                 });
 
-            modelBuilder.Entity("anki.Domain.CardTag", b =>
+            modelBuilder.Entity("CardTag", b =>
                 {
-                    b.HasOne("anki.Domain.Card", "Card")
-                        .WithMany("CardTags")
-                        .HasForeignKey("CardId")
+                    b.Property<Guid>("CardsId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("TagsTagId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("CardsId", "TagsTagId");
+
+                    b.HasIndex("TagsTagId");
+
+                    b.ToTable("CardTag");
+                });
+
+            modelBuilder.Entity("CardTag", b =>
+                {
+                    b.HasOne("anki.Domain.Card", null)
+                        .WithMany()
+                        .HasForeignKey("CardsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("anki.Domain.Tag", "Tag")
-                        .WithMany("CardTags")
-                        .HasForeignKey("TagId")
+                    b.HasOne("anki.Domain.Tag", null)
+                        .WithMany()
+                        .HasForeignKey("TagsTagId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Card");
-
-                    b.Navigation("Tag");
-                });
-
-            modelBuilder.Entity("anki.Domain.Card", b =>
-                {
-                    b.Navigation("CardTags");
-                });
-
-            modelBuilder.Entity("anki.Domain.Tag", b =>
-                {
-                    b.Navigation("CardTags");
                 });
 #pragma warning restore 612, 618
         }

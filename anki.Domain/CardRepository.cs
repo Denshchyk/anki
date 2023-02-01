@@ -25,7 +25,6 @@ public class CardRepository : ICardRepository
 
     public async Task<Card> RemoveCardAsync(Card card)
     {
-        
         _context.Cards.Remove(card);
         await _context.SaveChangesAsync();
         return card;
@@ -33,7 +32,6 @@ public class CardRepository : ICardRepository
 
     public async Task<Card?> GetByIdAsync(Guid id)
     {
-        
         var card = await _context.Cards.AsNoTracking().FirstOrDefaultAsync(card => card.Id == id);
         return card;
     }
