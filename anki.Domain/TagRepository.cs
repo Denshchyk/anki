@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace anki.Domain;
 
-public class TagRepository
+public class TagRepository : ITagRepository
 {
     private ApplicationContext _context;
 

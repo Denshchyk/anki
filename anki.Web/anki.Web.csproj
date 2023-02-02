@@ -27,7 +27,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\anki.Console\anki.Console.csproj" />
       <ProjectReference Include="..\anki.Domain\anki.Domain.csproj" />
     </ItemGroup>
 

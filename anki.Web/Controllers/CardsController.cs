@@ -13,8 +13,6 @@ public class CardsController : ControllerBase
 {
     private ICardService _cardService;
     
-    
-
     public CardsController(ICardService cardService)
     {
         _cardService = cardService;

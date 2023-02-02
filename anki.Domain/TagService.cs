@@ -1,10 +1,10 @@
 namespace anki.Domain;
 
-public class TagService
+public class TagService : ITagService
 {
-    private TagRepository _tagRepository;
+    private ITagRepository _tagRepository;
 
-    public TagService(TagRepository tagRepository)
+    public TagService(ITagRepository tagRepository)
     {
         _tagRepository = tagRepository;
     }
@@ -22,6 +22,15 @@ public class TagService
         await _tagRepository.RemoveTagAsync(tagDeleteId);
         return tagDeleteId;
     }
+
+    public async Task<Tag> DeleteTagByNameAsync(string name)
+    {
+        var tagDeleteName = await _tagRepository.GetByName(name);
+        ThrowExceptionIfTagNull(tagDeleteName);
+        await _tagRepository.RemoveTagAsync(tagDeleteName);
+        return tagDeleteName;
+    }
+    
     private static void ThrowExceptionIfTagNull(Tag? tagDeleteId)
     {
         if (tagDeleteId == null)
@@ -51,5 +60,11 @@ public class TagService
         ThrowExceptionIfTagNull(tagUpdate);
         await _tagRepository.UpdateTagAsync(tag);
         return tag;
+    }
+    public async Task AddTagAsync(Tag tag)
+    {
+        tag.TagId = Guid.NewGuid();
+
+        await _tagRepository.AddTagAsync(tag);
     }
 }
