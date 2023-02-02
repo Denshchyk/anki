@@ -25,7 +25,7 @@ public class TagService : ITagService
 
     public async Task<Tag> DeleteTagByNameAsync(string name)
     {
-        var tagDeleteName = await _tagRepository.GetByName(name);
+        var tagDeleteName = await _tagRepository.GetByNameAsync(name);
         ThrowExceptionIfTagNull(tagDeleteName);
         await _tagRepository.RemoveTagAsync(tagDeleteName);
         return tagDeleteName;
@@ -51,7 +51,7 @@ public class TagService : ITagService
 
     public async Task<Tag?> GetTagByNameAsync(string name)
     {
-        return await _tagRepository.GetByName(name);
+        return await _tagRepository.GetByNameAsync(name);
     }
 
     public async Task<Tag> UpdateTagAsync(Tag tag)

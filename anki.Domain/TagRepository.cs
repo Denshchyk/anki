@@ -44,7 +44,7 @@ public class TagRepository : ITagRepository
         return tag;
     }
 
-    public async Task<Tag?> GetByName(string name)
+    public async Task<Tag?> GetByNameAsync(string name)
     {
         var tag = await _context.Tags.AsNoTracking().FirstOrDefaultAsync(tag => tag.Name == name);
         return tag;

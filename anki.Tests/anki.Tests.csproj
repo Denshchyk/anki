@@ -20,7 +20,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\anki.Console\anki.Console.csproj" />
       <ProjectReference Include="..\anki.Domain\anki.Domain.csproj" />
       <ProjectReference Include="..\anki.Web\anki.Web.csproj" />
     </ItemGroup>

@@ -7,6 +7,6 @@ public interface ITagRepository
     Task<Tag> RemoveTagAsync(Tag tag);
     Task<Tag?> GetByTagIdAsync(Guid tagId);
     Task<Tag?> GetByTagIdAsync(string tagId);
-    Task<Tag?> GetByName(string name);
+    Task<Tag?> GetByNameAsync(string name);
     List<Tag> GetAll();
 }
