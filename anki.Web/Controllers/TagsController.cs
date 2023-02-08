@@ -1,4 +1,6 @@
 using anki.Domain;
+using anki.Domain.Interfases;
+using anki.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace anki.Web.Controllers;

@@ -1,6 +1,8 @@
+using anki.Domain.Interfases;
+using anki.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace anki.Domain;
+namespace anki.Domain.Repositories;
 
 public class TagRepository : ITagRepository
 {

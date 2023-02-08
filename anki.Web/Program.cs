@@ -1,4 +1,7 @@
 using anki.Domain;
+using anki.Domain.Interfases;
+using anki.Domain.Repositories;
+using anki.Domain.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +14,7 @@ builder.Services.AddScoped<ICardService, CardService>();
 builder.Services.AddScoped<ICardRepository, CardRepository>();
 builder.Services.AddScoped<ITagService, TagService>();
 builder.Services.AddScoped<ITagRepository, TagRepository>();
+builder.Services.AddScoped<ICardTagsRepository, CardTagsRepository>();
 builder.Services.AddDbContextPool<ApplicationContext>(opt =>
     opt.UseNpgsql(builder.Configuration.GetConnectionString("Applications")));
 var app = builder.Build();

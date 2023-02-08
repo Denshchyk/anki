@@ -1,5 +1,8 @@
 using System.ComponentModel;
 using anki.Domain;
+using anki.Domain.Interfases;
+using anki.Domain.Models;
+using anki.Domain.Services;
 using FluentAssertions;
 using FluentAssertions.Formatting;
 using Moq;

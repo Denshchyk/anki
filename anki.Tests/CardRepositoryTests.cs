@@ -1,5 +1,7 @@
 using System.ComponentModel;
 using anki.Domain;
+using anki.Domain.Models;
+using anki.Domain.Repositories;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;

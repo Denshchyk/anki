@@ -1,4 +1,7 @@
-namespace anki.Domain;
+using anki.Domain.Interfases;
+using anki.Domain.Models;
+
+namespace anki.Domain.Services;
 
 public class TagService : ITagService
 {

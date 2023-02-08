@@ -1,4 +1,6 @@
-namespace anki.Domain;
+using anki.Domain.Models;
+
+namespace anki.Domain.Interfases;
 
 public interface ICardRepository
 {

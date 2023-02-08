@@ -1,4 +1,4 @@
-namespace anki.Domain;
+namespace anki.Domain.Models;
 
 public class Tag
 {

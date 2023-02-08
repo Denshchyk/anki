@@ -1,7 +1,8 @@
-using System.Runtime.InteropServices;
 using System.Text.Json;
+using anki.Domain.Interfases;
+using anki.Domain.Models;
 
-namespace anki.Domain;
+namespace anki.Domain.Services;
 
 public class CardService : ICardService
 {
