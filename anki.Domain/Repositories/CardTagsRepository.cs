@@ -24,20 +24,14 @@ public class CardTagsRepository : ICardTagsRepository
        await _context.SaveChangesAsync();
        return deleteCardTag;
     }
-
-    public async Task UpdateCardTagAsync(CardTag updateCardTag)
-    {
-        _context.CardTags.Update(updateCardTag);
-        await _context.SaveChangesAsync();
-    }
     
     public IEnumerable<Card> GetAllCardsByTagId(Guid tagId)
     {
         return _context.CardTags.Where(x => x.TagId.Equals(tagId)).Select(x=> x.Card);
     }
 
-    public IEnumerable<Tag> GetAllTagsByCardId(Card Id)
+    public IEnumerable<Tag> GetAllTagsByCardId(Guid id)
     {
-        return _context.CardTags.Where(x => x.CardId.Equals(Id)).Select(x => x.Tag);
+        return _context.CardTags.Where(x => x.CardId.Equals(id)).Select(x => x.Tag);
     }
 }

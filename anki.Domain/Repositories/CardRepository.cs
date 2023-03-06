@@ -34,15 +34,13 @@ public class CardRepository : ICardRepository
 
     public async Task<Card?> GetByIdAsync(Guid id)
     {
-        var card = await _context.Cards.AsNoTracking().FirstOrDefaultAsync(card => card.Id == id);
+        var card = await _context.Cards.Include(x=> x.CardTags).AsNoTracking().FirstOrDefaultAsync(card => card.Id == id);
         return card;
     }
     public async Task<Card?> GetByIdAsync(string id)
     {
         var guid = Guid.Parse(id);
-        
-        var card = await _context.Cards.AsNoTracking().FirstOrDefaultAsync(card => card.Id == guid);
-        return card;
+        return await GetByIdAsync(guid);
     }
     public async Task<Card?> GetByFrontAndBackAsync(string front, string back)
     {
