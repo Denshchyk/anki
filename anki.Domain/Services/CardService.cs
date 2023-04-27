@@ -35,6 +35,16 @@ public class CardService : ICardService
         
        await _cardRepository.AddCardAsync(card);
     }
+    
+    public async Task AddCardWithTagAsync(string front, string back, string nameTag)
+    {
+        var card = new Card(front, back);
+
+        card.Id = Guid.NewGuid();
+        card.Time = DateTime.UtcNow;
+
+        await _cardRepository.AddCardAsync(card);
+    }
 
     public async Task<Card> DeleteCardIdAsync(string id)
     {
