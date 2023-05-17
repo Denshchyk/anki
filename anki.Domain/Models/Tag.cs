@@ -11,5 +11,5 @@ public class Tag
     
     public string Name { get; set; }
 
-    public List<CardTag> CardTags { get; set; } = new List<CardTag>();
+    public List<CardTag?> CardTags { get; set; } = new List<CardTag?>();
 }

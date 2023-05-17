@@ -67,7 +67,7 @@ public class CardsController : ControllerBase
         return await _cardService.DeleteCardAsync(getCard);
     }
 
-    [HttpPut]
+    [HttpPut("{id}")]
     public async Task<ActionResult<Card>> UpdateCard(Card card)
     {
         if (card == null)
@@ -78,9 +78,9 @@ public class CardsController : ControllerBase
         return await _cardService.UpdateCardAsync(card);
     }
 
-    [HttpPost]
-    public async Task AddCard(Card card)
+    [HttpPost("{front},{back}")]
+    public async Task AddCard(string front, string back)
     {
-        await _cardService.AddCardAsync(card);
+        await _cardService.AddCardAsync(front,back);
     }
 }

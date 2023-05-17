@@ -6,29 +6,29 @@ namespace anki.Domain.Repositories;
 public class CardTagsRepository : ICardTagsRepository
 {
     private readonly ApplicationContext _context;
-    private ICardTagsRepository _cardTagsRepositoryImplementation;
 
     public CardTagsRepository(ApplicationContext context)
     {
         _context = context;
     }
 
-    public async Task AddCardTagAsync(CardTag addCardTag)
+    public async Task AddCardTagAsync(CardTag? addCardTag)
     {
-        await _context.CardTags.AddAsync(addCardTag);
+        if (addCardTag != null) await _context.CardTags.AddAsync(addCardTag);
         await _context.SaveChangesAsync();
     }
-
-    public Task<CardTag> DeleteCardTagAsync(IEnumerable<Tag> deleteCardTag)
+    
+    public void DeleteCard(IEnumerable<Tag> tagsByTagId)
     {
-        throw new NotImplementedException();
-    }
-    public async Task DeleteCardTagAsync(List<Card> cardTagsByTagId)
-    {
-        throw new NotImplementedException();
+        _context.Tags.RemoveRange(tagsByTagId);
     }
     
-    public async Task<CardTag> DeleteCardTagAsync(CardTag deleteCardTag)
+    public void DeleteTag(IEnumerable<Card> cardsByCardId)
+    {
+        _context.Cards.RemoveRange(cardsByCardId);
+    }
+    
+    public async Task<CardTag?> DeleteCardTagAsync(CardTag? deleteCardTag)
     {
        _context.CardTags.Remove(deleteCardTag);
        await _context.SaveChangesAsync();
@@ -45,19 +45,8 @@ public class CardTagsRepository : ICardTagsRepository
         return _context.CardTags.Where(x => x.CardId.Equals(id)).Select(x => x.Tag);
     }
 
-    public IEnumerable<CardTag> GetCardTagByTagIdAndCardId(Guid cardId, Guid tagId)
+    public async Task<CardTag> GetCardTagByTagIdAndCardId(Guid cardId, Guid tagId)
     {
-        var cardTag = new CardTag(cardId, tagId);
-        return _context.CardTags.Where(x => x.CardId.Equals(cardId) && x.TagId.Equals(tagId)).Select(x => cardTag);
-    }
-
-    public object GetCardTagByTagIdAndCardId(CardTag cardTag)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task DeleteCardTagAsync(object cardTagsByTagId)
-    {
-        throw new NotImplementedException();
+        return await _context.CardTags.FirstOrDefaultAsync(x => x.CardId.Equals(cardId) && x.TagId.Equals(tagId));
     }
 }

@@ -4,8 +4,11 @@ namespace anki.Domain.Repositories;
 
 public interface ICardTagsRepository
 {
-    Task AddCardTagAsync(CardTag addCardTag);
-    Task<CardTag> DeleteCardTagAsync(IEnumerable<Tag> deleteCardTag);
+    Task AddCardTagAsync(CardTag? addCardTag);
+    void DeleteCard(IEnumerable<Tag> tagsByTagId);
+    void DeleteTag(IEnumerable<Card> cardsByCardId);
+    Task<CardTag?> DeleteCardTagAsync(CardTag? deleteCardTag);
     IEnumerable<Card> GetAllCardsByTagId(Guid? tagId);
-    IEnumerable<Tag> GetAllTagsByCardId(Guid Id);
+    IEnumerable<Tag> GetAllTagsByCardId(Guid id);
+    Task<CardTag> GetCardTagByTagIdAndCardId(Guid cardId, Guid tagId);
 }

@@ -76,9 +76,9 @@ public class TagsController : ControllerBase
         return await _tagService.UpdateTagAsync(tag);
     }
 
-    [HttpPost]
-    public async Task AddTag(Tag tag)
+    [HttpPost("{name}")]
+    public async Task AddTag(Guid tagId, string name)
     {
-        await _tagService.AddTagAsync(tag);
+        await _tagService.AddTagAsync(tagId, name);
     }
 }

@@ -57,7 +57,7 @@ public class CardTagsRepositoryTests
         var guidTag = "45965AD3-B77A-4B3A-B1C8-913848573D07";
         
         var cardTag = new CardTag(Guid.Parse(guidCard),Guid.Parse(guidTag));
-        var cardTags = new List<CardTag> { cardTag };
+        var cardTags = new List<CardTag?> { cardTag };
         await AddTestCardTagToInMemoryDb(cardTag);
 
         _cardTagRepository.GetAllCardsByTagId(cardTag.TagId).Should().HaveCount(1);
@@ -70,18 +70,18 @@ public class CardTagsRepositoryTests
         var guidTag = "45965AD3-B77A-4B3A-B1C8-913848573D07";
         
         var cardTag = new CardTag(Guid.Parse(guidCard),Guid.Parse(guidTag));
-        var cardTags = new List<CardTag> { cardTag };
+        var cardTags = new List<CardTag?> { cardTag };
         await AddTestCardTagToInMemoryDb(cardTag);
 
         _cardTagRepository.GetAllTagsByCardId(cardTag.CardId).Should().HaveCount(1);
     }
     
-    private async Task AddTestCardTagToInMemoryDb(CardTag cardTag)
+    private async Task AddTestCardTagToInMemoryDb(CardTag? cardTag)
     {
         await using var context = new ApplicationContext(_options);
         context.CardTags.Add(cardTag);
         
-        var cardTags = new List<CardTag> { cardTag };
+        var cardTags = new List<CardTag?> { cardTag };
         context.Cards.Add(new Card("front", "back") { CardTags = cardTags });
         context.Tags.Add(new Tag(Guid.Parse("45965AD3-B77A-4B3A-B1C8-913848573D07"), "name") { CardTags = cardTags });
         

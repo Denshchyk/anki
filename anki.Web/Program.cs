@@ -15,6 +15,7 @@ builder.Services.AddScoped<ICardRepository, CardRepository>();
 builder.Services.AddScoped<ITagService, TagService>();
 builder.Services.AddScoped<ITagRepository, TagRepository>();
 builder.Services.AddScoped<ICardTagsRepository, CardTagsRepository>();
+builder.Services.AddScoped<ICardTagsService, CardTagsService>();
 builder.Services.AddDbContextPool<ApplicationContext>(opt =>
     opt.UseNpgsql(builder.Configuration.GetConnectionString("Applications")));
 var app = builder.Build();

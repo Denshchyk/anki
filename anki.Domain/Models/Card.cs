@@ -18,7 +18,7 @@ public class Card
     
     public Guid Id { get; set; }
     
-    public List<CardTag> CardTags { get; set; }
+    public List<CardTag?> CardTags { get; set; }
     
     public override string ToString()
     {

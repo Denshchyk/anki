@@ -5,11 +5,11 @@ using anki.Domain.Repositories;
 
 namespace anki.Domain.Services;
 
-public class CardTagsService
+public class CardTagsService : ICardTagsService
 {
-    private CardTagsRepository _cardTagsRepository;
+    private ICardTagsRepository _cardTagsRepository;
 
-    public CardTagsService(CardTagsRepository cardTagRepository)
+    public CardTagsService(ICardTagsRepository cardTagRepository)
     {
         _cardTagsRepository = cardTagRepository;
     }
@@ -22,15 +22,24 @@ public class CardTagsService
 
     public async Task DeleteOneCardTag(Guid cardId, Guid tagId)
     {
-        var cardTag = new CardTag(cardId, tagId);
-        var getCardTag = _cardTagsRepository.GetCardTagByTagIdAndCardId(cardTag);
-        ThrowExceptionIfCardTagNull(getCardTag);
+        var getCardTag = await GetCardTagByTagIdAndCardId(cardId, tagId);
+        ThrowExceptionIfCardTagNull(cardId, tagId);
         await _cardTagsRepository.DeleteCardTagAsync(getCardTag);
     }
-
-    private void ThrowExceptionIfCardTagNull(object getCardTag)
+    
+    public async Task<CardTag> GetCardTagByTagIdAndCardId(Guid cardId, Guid tagId)
     {
-        throw new NotImplementedException();
+        return await _cardTagsRepository.GetCardTagByTagIdAndCardId(cardId,tagId);
+    }
+
+    public IEnumerable<Tag> GetAllTagsByCardId(Guid cardId)
+    {
+        return _cardTagsRepository.GetAllTagsByCardId(cardId);
+    }
+
+    public IEnumerable<Card> GetAllCardsByTagId(Guid tagId)
+    {
+        return _cardTagsRepository.GetAllCardsByTagId(tagId);
     }
 
     private static void ThrowExceptionIfCardTagNull(Guid cardId, Guid tagId)
@@ -46,13 +55,12 @@ public class CardTagsService
         }
     }
 
-    public async Task<IEnumerable<Tag>> DeleteAllCardTagFromOneCardAsync(Guid cardId)
+    public IEnumerable<Tag> DeleteAllCardTagFromOneCard(Guid cardId)
     {
-        var getCardTagsByCardId = _cardTagsRepository.GetAllTagsByCardId(cardId);
         ThrowExceptionIfCardNull(cardId);
-        var cardTagsByCardId = getCardTagsByCardId.ToList();
-        await _cardTagsRepository.DeleteCardTagAsync(cardTagsByCardId);
-        return cardTagsByCardId;
+        var getTagsByCardId = GetAllTagsByCardId(cardId);
+        _cardTagsRepository.DeleteCard(getTagsByCardId);
+        return getTagsByCardId;
     }
     private static void ThrowExceptionIfCardNull(Guid? cardId)
     {
@@ -62,14 +70,14 @@ public class CardTagsService
         }
     }
     
-    public async Task<IEnumerable<Card>> DeleteAllCardTagFromOneTagAsync(Guid? tagId)
+    public IEnumerable<Card> DeleteAllCardTagFromOneTag(Guid tagId)
     {
-        var getCardTagsByTagId = _cardTagsRepository.GetAllCardsByTagId(tagId);
         ThrowExceptionIfTagNull(tagId);
-        var cardTagsByTagId = getCardTagsByTagId.ToList();
-        await _cardTagsRepository.DeleteCardTagAsync(cardTagsByTagId);
-        return cardTagsByTagId;
+        var cards = GetAllCardsByTagId(tagId);
+        _cardTagsRepository.DeleteTag(cards);
+        return cards;
     }
+    
     private static void ThrowExceptionIfTagNull(Guid? tagId)
     {
         if (tagId == null)
