@@ -1,5 +1,6 @@
 namespace anki.Domain.Models;
 
+public record CardModel(string Id, string Front, string Back, IEnumerable<string> Tags);
 public class Card
 {
     public Card(string front, string back)
@@ -18,7 +19,7 @@ public class Card
     
     public Guid Id { get; set; }
     
-    public List<CardTag?> CardTags { get; set; }
+    public virtual List<CardTag>? CardTags { get; set; }
     
     public override string ToString()
     {

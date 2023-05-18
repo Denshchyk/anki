@@ -1,15 +1,18 @@
 using anki.Domain.Interfases;
 using anki.Domain.Models;
+using anki.Domain.Repositories;
 
 namespace anki.Domain.Services;
 
 public class TagService : ITagService
 {
     private ITagRepository _tagRepository;
+    private ICardTagsRepository _cardTagsRepository;
 
-    public TagService(ITagRepository tagRepository)
+    public TagService(ITagRepository tagRepository, ICardTagsRepository cardTagsRepository)
     {
         _tagRepository = tagRepository;
+        _cardTagsRepository = cardTagsRepository;
     }
 
     public async Task AddTagAsync(Guid tagId, string name)
@@ -47,9 +50,12 @@ public class TagService : ITagService
         return _tagRepository.GetAll();
     }
 
-    public async Task<Tag?> GetByTagIdAsync(string tagId)
+    public async Task<TagModel> GetByTagIdAsync(string tagId)
     {
-        return await _tagRepository.GetByTagIdAsync(tagId);
+        var tag = await _tagRepository.GetByTagIdAsync(tagId);
+        var guid = Guid.Parse(tagId);
+        var cards = _cardTagsRepository.GetAllCardsByTagId(guid).Select(x=> x.Front).ToList();
+        return new TagModel(tag.Name, cards);
     }
 
     public async Task<Tag?> GetTagByNameAsync(string name)
@@ -57,12 +63,13 @@ public class TagService : ITagService
         return await _tagRepository.GetByNameAsync(name);
     }
 
-    public async Task<Tag> UpdateTagAsync(Tag tag)
+    public async Task<Tag> UpdateTagAsync(TagModel tag, string tagId)
     {
-        var tagUpdate = await _tagRepository.GetByTagIdAsync(tag.TagId);
-        ThrowExceptionIfTagNull(tagUpdate);
-        await _tagRepository.UpdateTagAsync(tag);
-        return tag;
+        var getTag = await _tagRepository.GetByTagIdAsync(tagId);
+        ThrowExceptionIfTagNull(getTag);
+        getTag.Name = tag.Name;
+        await _tagRepository.UpdateTagAsync(getTag);
+        return getTag;
     }
     public async Task AddTagAsync(Tag tag)
     {

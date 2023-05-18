@@ -40,9 +40,15 @@ public class CardTagsRepository : ICardTagsRepository
         return _context.CardTags.Where(x => x.TagId.Equals(tagId)).Select(x=> x.Card);
     }
 
-    public IEnumerable<Tag> GetAllTagsByCardId(Guid id)
+    public IEnumerable<Tag> GetAllTagsByCardId(string id)
     {
-        return _context.CardTags.Where(x => x.CardId.Equals(id)).Select(x => x.Tag);
+        var guid = Guid.Parse(id);
+        return _context.CardTags.Where(x => x.CardId.Equals(guid)).Select(x => x.Tag);
+    }
+
+    public List<CardTag> GetAllCardTags()
+    {
+        return _context.CardTags.ToList();
     }
 
     public async Task<CardTag> GetCardTagByTagIdAndCardId(Guid cardId, Guid tagId)

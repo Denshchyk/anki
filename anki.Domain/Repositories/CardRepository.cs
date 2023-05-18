@@ -34,7 +34,7 @@ public class CardRepository : ICardRepository
 
     public async Task<Card?> GetByIdAsync(Guid id)
     {
-        var card = await _context.Cards.Include(x=> x.CardTags).AsNoTracking().FirstOrDefaultAsync(card => card.Id == id);
+        var card = await _context.Cards.Include(x=> x.CardTags).ThenInclude(t=> t.Tag).AsNoTracking().FirstOrDefaultAsync(card => card.Id == id);
         return card;
     }
     public async Task<Card?> GetByIdAsync(string id)
@@ -49,6 +49,6 @@ public class CardRepository : ICardRepository
     }
     public List<Card> GetAll()
     {
-        return _context.Cards.ToList();
+        return _context.Cards.Include(x=> x.CardTags).ThenInclude(c=>c.Tag).ToList();
     }
 }

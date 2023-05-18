@@ -9,7 +9,7 @@ public interface ITagService
     Task<Tag> DeleteTagIdAsync(string tagId);
     Task<Tag> DeleteTagByNameAsync(string name);
     List<Tag> GetAll();
-    Task<Tag?> GetByTagIdAsync(string tagId);
+    Task<TagModel> GetByTagIdAsync(string tagId);
     Task<Tag?> GetTagByNameAsync(string name);
-    Task<Tag> UpdateTagAsync(Tag tag);
+    Task<Tag> UpdateTagAsync(TagModel tag, string tagId);
 }

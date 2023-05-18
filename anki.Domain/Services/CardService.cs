@@ -1,16 +1,19 @@
 using System.Text.Json;
 using anki.Domain.Interfases;
 using anki.Domain.Models;
+using anki.Domain.Repositories;
 
 namespace anki.Domain.Services;
 
 public class CardService : ICardService
 {
     private ICardRepository _cardRepository;
+    private ICardTagsRepository _cardTagsRepository;
 
-    public CardService(ICardRepository cardRepository)
+    public CardService(ICardRepository cardRepository, ICardTagsRepository cardTagsRepository)
     {
         _cardRepository = cardRepository;
+        _cardTagsRepository = cardTagsRepository;
     }
 
     public Card GetRandomOverdueCard()
@@ -66,15 +69,16 @@ public class CardService : ICardService
     {
         card.Time = DateTime.UtcNow;
         card.Time = card.Time.AddMinutes(minutes);
-        await UpdateCardAsync(card);
+        await _cardRepository.UpdateCardAsync(card);
     }
 
-    public async Task<Card> UpdateCardAsync (Card card)
+    public async Task<Card> UpdateCardAsync (string id, CardModel card)
     {
-        var cardUpdate = await _cardRepository.GetByIdAsync(card.Id);
-        ThrowExceptionIfCardNull(cardUpdate);
-        await _cardRepository.UpdateCardAsync(card);
-        return card;
+        var getCard = await _cardRepository.GetByIdAsync(id);
+        getCard.Back = card.Back;
+        getCard.Front = card.Front;
+        await _cardRepository.UpdateCardAsync(getCard);
+        return getCard;
     }
 
     public async Task<Card> DeleteCardAsync(Card card)
@@ -100,14 +104,18 @@ public class CardService : ICardService
         return card;
     }
 
-    public List<Card> GetAll()
-    {
-       return _cardRepository.GetAll();
+    public List<CardModel> GetAll()
+    { 
+        var cards = _cardRepository.GetAll();
+        var tags = _cardTagsRepository.GetAllCardTags().Select(x => x.Tag).ToList();
+        return cards.Select(x => new CardModel(x.Id.ToString(), x.Front, x.Back, x.CardTags.Select(t => t.Tag.Name))).ToList();
     }
 
-    public async Task<Card?> GetByIdAsync(string id)
+    public async Task<CardModel> GetByIdAsync(string id)
     {
-        return await _cardRepository.GetByIdAsync(id);
+        var card = await _cardRepository.GetByIdAsync(id);
+        var tags = _cardTagsRepository.GetAllTagsByCardId(id).Select(x=> x.Name).ToList();
+        return new CardModel(card.Id.ToString(), card.Front, card.Back, tags);
     }
 
     public async Task<Card?> GetByFrontAndBackAsync(string front, string back)

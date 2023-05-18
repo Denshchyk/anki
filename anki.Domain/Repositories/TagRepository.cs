@@ -34,16 +34,14 @@ public class TagRepository : ITagRepository
 
     public async Task<Tag?> GetByTagIdAsync(Guid tagId)
     {
-        var tag = await _context.Tags.AsNoTracking().FirstOrDefaultAsync(tag => tag.TagId == tagId);
+        var tag = await _context.Tags.Include(x=>x.CardTags).ThenInclude(c=> c.Card).AsNoTracking().FirstOrDefaultAsync(tag => tag.TagId == tagId);
         return tag;
     }
     
-    public async Task<Tag?> GetByTagIdAsync(string tagId)
+    public async Task<Tag> GetByTagIdAsync(string tagId)
     {
         var guid = Guid.Parse(tagId);
-        
-        var tag = await _context.Tags.AsNoTracking().FirstOrDefaultAsync(tag => tag.TagId == guid);
-        return tag;
+        return await GetByTagIdAsync(guid);
     }
 
     public async Task<Tag?> GetByNameAsync(string name)

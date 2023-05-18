@@ -32,7 +32,7 @@ public class CardTagsService : ICardTagsService
         return await _cardTagsRepository.GetCardTagByTagIdAndCardId(cardId,tagId);
     }
 
-    public IEnumerable<Tag> GetAllTagsByCardId(Guid cardId)
+    public IEnumerable<Tag> GetAllTagsByCardId(string cardId)
     {
         return _cardTagsRepository.GetAllTagsByCardId(cardId);
     }
@@ -55,14 +55,14 @@ public class CardTagsService : ICardTagsService
         }
     }
 
-    public IEnumerable<Tag> DeleteAllCardTagFromOneCard(Guid cardId)
+    public IEnumerable<Tag> DeleteAllCardTagFromOneCard(string cardId)
     {
         ThrowExceptionIfCardNull(cardId);
-        var getTagsByCardId = GetAllTagsByCardId(cardId);
+        var getTagsByCardId = _cardTagsRepository.GetAllTagsByCardId(cardId);
         _cardTagsRepository.DeleteCard(getTagsByCardId);
         return getTagsByCardId;
     }
-    private static void ThrowExceptionIfCardNull(Guid? cardId)
+    private static void ThrowExceptionIfCardNull(string cardId)
     {
         if (cardId == null)
         {

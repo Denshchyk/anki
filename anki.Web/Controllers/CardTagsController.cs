@@ -35,7 +35,7 @@ public class CardTagsController : ControllerBase
     }
 
     [HttpDelete("{cardId}")]
-    public ActionResult<Tag> DeleteAllCardTagsFromOneCard(Guid cardId)
+    public ActionResult<Tag> DeleteAllCardTagsFromOneCard(string cardId)
     {
         var tags =  _cardTagsService.GetAllTagsByCardId(cardId);
 

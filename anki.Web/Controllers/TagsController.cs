@@ -23,7 +23,7 @@ public class TagsController : ControllerBase
     }
 
     [HttpGet("{tagId}")]
-    public async Task<ActionResult<Tag>> GetTag(string tagId)
+    public async Task<ActionResult<TagModel>> GetTag(string tagId)
     {
         var tag = await _tagService.GetByTagIdAsync(tagId);
 
@@ -65,15 +65,10 @@ public class TagsController : ControllerBase
         return tag;
     }
     
-    [HttpPut]
-    public async Task<ActionResult<Tag>> UpdateTag(Tag tag)
+    [HttpPut("{tagId}")]
+    public async Task<ActionResult<Tag>> UpdateTag(string tagId, TagModel tag)
     {
-        if (tag == null)
-        {
-            return NotFound();
-        }
-
-        return await _tagService.UpdateTagAsync(tag);
+        return await _tagService.UpdateTagAsync(tag, tagId);
     }
 
     [HttpPost("{name}")]

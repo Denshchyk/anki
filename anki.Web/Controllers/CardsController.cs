@@ -21,13 +21,13 @@ public class CardsController : ControllerBase
     }
     
     [HttpGet]
-    public IEnumerable<Card> Get()
+    public IEnumerable<CardModel> Get()
     {
         return _cardService.GetAll();
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<Card>> GetCard(string id)
+    public async Task<ActionResult<CardModel>> GetCard(string id)
     {
         var card = await _cardService.GetByIdAsync(id);
 
@@ -68,14 +68,9 @@ public class CardsController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<ActionResult<Card>> UpdateCard(Card card)
+    public async Task<ActionResult<Card>> UpdateCard(string id, CardModel card)
     {
-        if (card == null)
-        {
-            return NotFound();
-        }
-
-        return await _cardService.UpdateCardAsync(card);
+        return await _cardService.UpdateCardAsync(id, card);
     }
 
     [HttpPost("{front},{back}")]
