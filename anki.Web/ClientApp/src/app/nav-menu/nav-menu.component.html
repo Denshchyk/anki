@@ -3,7 +3,7 @@
     class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3"
   >
     <div class="container">
-      <a class="navbar-brand" [routerLink]="['/']">anki.Web</a>
+      <a class="navbar-brand" [routerLink]="['/']">anki.Web <img src="https://img.freepik.com/premium-vector/ukraine-map-in-heart-icon-abstract-patriotic-ukrainian-flag-with-love-symbol-blue-and-yellow-conceptual-idea-with-ukraine-in-his-heart-support-for-the-country-during-the-occupation-stop-war_127746-3857.jpg" [width]="70"></a>
       <button
         class="navbar-toggler"
         type="button"
@@ -28,14 +28,13 @@
             <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/counter']"
-              >Counter</a
-            >
+            <a class="nav-link text-dark" [routerLink]="['/Decks']">Decks</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/fetch-data']"
-              >Fetch data</a
-            >
+            <a class="nav-link text-dark" [routerLink]="['/About']">About</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['/Login']">Login</a>
           </li>
         </ul>
       </div>
