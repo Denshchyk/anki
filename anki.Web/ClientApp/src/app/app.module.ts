@@ -11,6 +11,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatCardModule } from "@angular/material/card";
 import {MatMenuModule} from "@angular/material/menu";
+import {MatInputModule} from "@angular/material/input";
+import {MatButtonModule} from "@angular/material/button";
+import {MatIconModule} from "@angular/material/icon";
+import {MatProgressBarModule} from "@angular/material/progress-bar";
 
 @NgModule({
   declarations: [
@@ -28,15 +32,11 @@ import {MatMenuModule} from "@angular/material/menu";
     ]),
     BrowserAnimationsModule,
     MatCardModule,
-    MatCardModule,
-    MatCardModule,
-    MatCardModule,
-    MatCardModule,
-    MatCardModule,
     MatMenuModule,
-    MatMenuModule,
-    MatMenuModule,
-    MatMenuModule
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+    MatProgressBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
